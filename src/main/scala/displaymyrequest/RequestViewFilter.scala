@@ -1,4 +1,4 @@
-package displaymyheaders
+package displaymyrequest
 
 import javax.servlet._
 import http.{HttpServletRequest, HttpServletResponse}
@@ -13,10 +13,11 @@ import collection.JavaConversions._
  * Time:   3:26 PM
  */
 
-class HeadersFilter extends Filter {
+class RequestViewFilter extends Filter {
   def doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
+    val out = response.getOutputStream
     val writer = new BufferedWriter(
-      new OutputStreamWriter(response.getOutputStream, "UTF-8"))
+      new OutputStreamWriter(out, "UTF-8"))
 
     val httpReq = request.asInstanceOf[HttpServletRequest]
     val httpResp = response.asInstanceOf[HttpServletResponse]
@@ -47,6 +48,7 @@ class HeadersFilter extends Filter {
 
     writer.write(new Yaml().dumpAsMap(resp))
     writer.close()
+    out.close()
   }
 
   def init(filterConfig: FilterConfig) {}

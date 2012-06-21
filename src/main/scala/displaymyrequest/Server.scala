@@ -1,4 +1,4 @@
-package displaymyheaders
+package displaymyrequest
 
 import org.eclipse.jetty.server.{Server => JettyServer}
 import org.eclipse.jetty.webapp.WebAppContext
@@ -27,11 +27,11 @@ object Server extends App {
 
   val pool = new QueuedThreadPool()
   pool.setMinThreads(10)
-  pool.setMaxThreads(100)
+  pool.setMaxThreads(50)
   server.setThreadPool(pool)
 
   val webXmlPath = this.getClass.getResource("/WEB-INF/web.xml").toExternalForm
-  val resourceBase = this.getClass.getResource("/").toExternalForm
+  val resourceBase = this.getClass.getResource("/assets/").toExternalForm
 
   val context = new WebAppContext()
   context.setDescriptor(webXmlPath)
