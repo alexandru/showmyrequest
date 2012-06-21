@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/displaymyrequest-1.0.jar
+web: java $JAVA_OPTS -cp target/classes/:target/dependency/* displaymyrequest.Server

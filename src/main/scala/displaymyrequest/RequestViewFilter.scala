@@ -6,12 +6,22 @@ import java.io._
 import java.util
 import org.yaml.snakeyaml.Yaml
 import collection.JavaConversions._
+import com.maxmind.geoip
+import geoip.LookupService
+import java.lang.Byte
 
 /**
  * Author: Alexandru Nedelcu
  * Email:  contact@alexn.org
  * Time:   3:26 PM
  */
+
+object RequestViewFilter {
+  lazy val locator = {
+    val geoipDB = classOf[RequestViewFilter].getResource("/geoip/GeoLiteCity.dat").getPath
+    new LookupService(geoipDB, LookupService.GEOIP_INDEX_CACHE)
+  }
+}
 
 class RequestViewFilter extends Filter {
   def doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
@@ -40,6 +50,26 @@ class RequestViewFilter extends Filter {
         headers.put(key, values)
     }
 
+    val forwardedKey = headers.keySet().find(_.toLowerCase == "x-forwarded-for")
+    val realIP = forwardedKey match {
+      case Some(v) => v.split(',')(0).stripMargin
+      case None => httpReq.getRemoteAddr
+    }
+
+    try {
+      val location = RequestViewFilter.locator.getLocation(realIP)
+      val locMap = mutableMapAsJavaMap(collection.mutable.Map(
+        "city" -> location.city,
+        "country" -> location.countryName,
+        "country-code" -> location.countryCode,
+        "latitude" -> location.latitude,
+        "longitude" -> location.longitude
+      ))
+
+      resp.put("GeoIP-Location", locMap)
+    } catch { case _ => }
+
+    resp.put("Real-IP", realIP)
     resp.put("Headers", headers)
     resp.put("Parameters",  httpReq.getParameterMap)
 
