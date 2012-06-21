@@ -13,7 +13,6 @@ URI: /some/path
 Method: GET
 Query: first_name=Alex&email=not+available
 Remote-Addr: 10.125.47.117
-Remote-Host: 10.125.47.117
 Remote-Port: 51488
 GeoIP-Location:
   city: Bucharest
@@ -21,11 +20,11 @@ GeoIP-Location:
   latitude: 44.433304
   country-code: RO
   longitude: 26.100006
-Real-IP: 86.127.153.169
+Real-IP: 86.127.163.169
 Headers:
   Host: displaymyrequest.herokuapp.com
   Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-  X-Forwarded-For: 86.127.153.169
+  X-Forwarded-For: 86.127.163.169
   Accept-Language: en-us,en;q=0.5
   X-Forwarded-Port: '80'
   Connection: keep-alive
