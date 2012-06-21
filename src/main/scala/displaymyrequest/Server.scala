@@ -15,8 +15,8 @@ object Server extends App {
   val server = new JettyServer()
 
   val host = "0.0.0.0"
-  val port = if (System.getProperty("PORT") != null)
-    System.getProperty("PORT")
+  val port = if (System.getenv("PORT") != null)
+    System.getenv("PORT")
   else
     "8080"
 
@@ -27,7 +27,7 @@ object Server extends App {
 
   val pool = new QueuedThreadPool()
   pool.setMinThreads(10)
-  pool.setMaxThreads(50)
+  pool.setMaxThreads(100)
   server.setThreadPool(pool)
 
   val webXmlPath = this.getClass.getResource("/WEB-INF/web.xml").toExternalForm

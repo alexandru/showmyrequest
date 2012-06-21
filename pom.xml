@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>displaymyheaders</groupId>
-    <artifactId>displaymyheaders</artifactId>
+    <groupId>com.bionicspirit</groupId>
+    <artifactId>displaymyrequest</artifactId>
     <version>1.0</version>
 
     <packaging>jar</packaging>
@@ -18,11 +18,6 @@
             <id>Typesafe Central</id>
             <name>releases</name>
             <url>http://repo.typesafe.com/typesafe/releases</url>
-        </repository>
-        <repository>
-            <id>m2.dev.java.net</id>
-            <url>http://download.java.net/maven/2</url>
-            <layout>default</layout>
         </repository>
     </repositories>
 
