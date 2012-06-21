@@ -6,9 +6,7 @@ import java.io._
 import java.util
 import org.yaml.snakeyaml.Yaml
 import collection.JavaConversions._
-import com.maxmind.geoip
-import geoip.LookupService
-import java.lang.Byte
+import com.maxmind.geoip.LookupService
 
 /**
  * Author: Alexandru Nedelcu
@@ -41,15 +39,9 @@ class RequestViewFilter extends Filter {
     resp.put("Remote-Host", httpReq.getRemoteHost)
     resp.put("Remote-Port", httpReq.getRemotePort)
 
-    val herokuHeaders = Seq(
-      "X-Request-Start",
-      "X-Heroku-Dynos-In-Use",
-      "X-Heroku-Queue-Wait-Time",
-      "X-Heroku-Queue-Depth"
-    )
-
     val headers = new util.LinkedHashMap[String, Any]()
-    httpReq.getHeaderNames.filterNot(x => herokuHeaders.exists(_ == x)).
+    httpReq.getHeaderNames.filterNot(_.toLowerCase.contains("heroku")).
+      filterNot(_ == "X-Request-Start").
       foreach { key =>
         val values = httpReq.getHeaders(key).toArray
         if (values.length == 1)
@@ -60,7 +52,7 @@ class RequestViewFilter extends Filter {
 
     val forwardedKey = headers.keySet().find(_.toLowerCase == "x-forwarded-for")
     val realIP = forwardedKey match {
-      case Some(v) => v.split(',')(0).stripMargin
+      case Some(v) => headers.get(v).asInstanceOf[String].split(',')(0).stripMargin
       case None => httpReq.getRemoteAddr
     }
 
