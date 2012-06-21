@@ -1,5 +1,0 @@
-Just a simple helper I'm using to test my clients.
-It simply parses the request and dumps it as an YAML object.
-
-Visit:
-   http://displaymyrequest.herokuapp.com/hello?param=world&another=Alex
