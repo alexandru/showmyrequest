@@ -1,11 +1,11 @@
-Just a simple helper I'm using to test my clients.
-It simply parses the request and dumps it as an YAML object.
+Just a simple helper I'm using to test my clients.  It simply parses
+the request and dumps it as an YAML object.
 
 Some use-cases:
 
 - in case your client accesses a website that does geo-IP filtering,
-  you may want to play with the X-Forwarded-For header to simulate a
-  request from another city
+  you may want to play with the X-Forwarded-For header to indicate the
+  request is coming from another city
 - you may want to see if the Referer or Cookie or other headers were
   passed correctly
 - etc...
