@@ -32,11 +32,11 @@ class RequestViewFilter extends Filter {
 
     val resp = new util.LinkedHashMap[String, Any]()
 
-    resp.put("URI", httpReq.getRequestURI)
     resp.put("Method", httpReq.getMethod)
+    resp.put("Path", httpReq.getRequestURI)
     resp.put("Query", Option.apply(httpReq.getQueryString).getOrElse(""))
+
     resp.put("Remote-Addr", httpReq.getRemoteAddr)
-    resp.put("Remote-Host", httpReq.getRemoteHost)
     resp.put("Remote-Port", httpReq.getRemotePort)
 
     val headers = new util.LinkedHashMap[String, Any]()
@@ -56,6 +56,8 @@ class RequestViewFilter extends Filter {
       case None => httpReq.getRemoteAddr
     }
 
+    resp.put("Real-IP", realIP)
+
     try {
       val location = RequestViewFilter.locator.getLocation(realIP)
       val locMap = mutableMapAsJavaMap(collection.mutable.Map(
@@ -69,7 +71,6 @@ class RequestViewFilter extends Filter {
       resp.put("GeoIP-Location", locMap)
     } catch { case _ => }
 
-    resp.put("Real-IP", realIP)
     resp.put("Headers", headers)
     resp.put("Parameters",  httpReq.getParameterMap)
 
