@@ -41,14 +41,22 @@ class RequestViewFilter extends Filter {
     resp.put("Remote-Host", httpReq.getRemoteHost)
     resp.put("Remote-Port", httpReq.getRemotePort)
 
+    val herokuHeaders = Seq(
+      "X-Request-Start",
+      "X-Heroku-Dynos-In-Use",
+      "X-Heroku-Queue-Wait-Time",
+      "X-Heroku-Queue-Depth"
+    )
+
     val headers = new util.LinkedHashMap[String, Any]()
-    httpReq.getHeaderNames.foreach { key =>
-      val values = httpReq.getHeaders(key).toArray
-      if (values.length == 1)
-        headers.put(key, values.head)
-      else
-        headers.put(key, values)
-    }
+    httpReq.getHeaderNames.filterNot(x => herokuHeaders.exists(_ == x)).
+      foreach { key =>
+        val values = httpReq.getHeaders(key).toArray
+        if (values.length == 1)
+          headers.put(key, values.head)
+        else
+          headers.put(key, values)
+      }
 
     val forwardedKey = headers.keySet().find(_.toLowerCase == "x-forwarded-for")
     val realIP = forwardedKey match {
