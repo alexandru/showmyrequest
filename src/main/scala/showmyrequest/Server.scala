@@ -1,4 +1,4 @@
-package displaymyrequest
+package showmyrequest
 
 import org.eclipse.jetty.server.{Server => JettyServer}
 import org.eclipse.jetty.webapp.WebAppContext

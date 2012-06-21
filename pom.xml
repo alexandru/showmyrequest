@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bionicspirit</groupId>
-    <artifactId>displaymyrequest</artifactId>
+    <artifactId>showmyrequest</artifactId>
     <version>1.0</version>
 
     <packaging>jar</packaging>
@@ -125,7 +125,7 @@
                     <launchers>
                         <launcher>
                             <id>server</id>
-                            <mainClass>displaymyrequest.core.Server</mainClass>
+                            <mainClass>showmyrequest.core.Server</mainClass>
                         </launcher>
                     </launchers>
                 </configuration>

@@ -4,7 +4,7 @@ hackish but it works.
 
 Sample request:
 
-[http://displaymyrequest.herokuapp.com/some/path?first_name=Alex&email=not+available](http://displaymyrequest.herokuapp.com/some/path?first_name=Alex&email=not+available)
+[http://showmyrequest.herokuapp.com/some/path?first_name=Alex&email=not+available](http://showmyrequest.herokuapp.com/some/path?first_name=Alex&email=not+available)
 
 Sample response (notice the YAML format):
 
@@ -22,7 +22,7 @@ GeoIP-Location:
   longitude: 26.100006
 Real-IP: 86.127.163.169
 Headers:
-  Host: displaymyrequest.herokuapp.com
+  Host: showmyrequest.herokuapp.com
   Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
   X-Forwarded-For: 86.127.163.169
   Accept-Language: en-us,en;q=0.5

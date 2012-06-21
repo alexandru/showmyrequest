@@ -1,4 +1,4 @@
-package displaymyrequest
+package showmyrequest
 
 import javax.servlet._
 import http.{HttpServletRequest, HttpServletResponse}

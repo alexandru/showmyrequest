@@ -7,7 +7,7 @@
 
     <filter>
         <filter-name>RequestViewFilter</filter-name>
-        <filter-class>displaymyrequest.RequestViewFilter</filter-class>
+        <filter-class>showmyrequest.RequestViewFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>RequestViewFilter</filter-name>
