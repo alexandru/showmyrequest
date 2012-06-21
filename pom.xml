@@ -12,6 +12,10 @@
 
     <repositories>
         <repository>
+            <id>repo.codahale.com</id>
+            <url>http://repo.codahale.com/</url>
+        </repository>
+        <repository>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
