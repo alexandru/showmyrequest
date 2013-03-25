@@ -34,9 +34,7 @@ class RequestViewFilter(locator: GeoIPLocator) extends Filter with Metrics {
         resp.put("Remote-Port", httpReq.getRemotePort)
 
         val headers = new util.LinkedHashMap[String, Any]()
-        httpReq.getHeaderNames.filterNot(_.toLowerCase.contains("heroku")).
-          filterNot(_ == "X-Request-Start").
-          foreach {
+        httpReq.getHeaderNames.foreach {
           key =>
             val values = httpReq.getHeaders(key).toArray
             if (values.length == 1)
