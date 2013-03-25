@@ -51,6 +51,7 @@ class RequestViewFilter(locator: GeoIPLocator) extends Filter with Metrics {
 
         resp.put("Real-IP", realIP)
         resp.put("GeoIP-Location", locator.locate(realIP))
+        resp.put("Current-Time", System.currentTimeMillis())
 
         resp.put("Headers", headers)
         resp.put("Parameters", httpReq.getParameterMap)
