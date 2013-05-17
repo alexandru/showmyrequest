@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd `dirname $0`/..
+
+if [[ -z "$PORT" ]]; then
+  export JAVA_OPTS="$JAVA_OPTS"
+else
+  export JAVA_OPTS="-Dhttp.server.port=$PORT $JAVA_OPTS"
+fi
+
+exec target/start
